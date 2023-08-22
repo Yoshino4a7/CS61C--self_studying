@@ -20,21 +20,36 @@ typedef struct ComplexNumber
 ComplexNumber* newComplexNumber(double real_component, double imaginary_component)
 {
     //YOUR CODE HERE
-	return NULL;
+	ComplexNumber * comNum=(ComplexNumber *)malloc(sizeof(ComplexNumber));
+	comNum->real=real_component;
+	comNum->imaginary=imaginary_component;
+	return comNum;
 }
 
 //Returns a pointer to a new Complex Number equal to a*b
 ComplexNumber* ComplexProduct(ComplexNumber* a, ComplexNumber* b)
 {
     //YOUR CODE HERE
-	return NULL;
+	double a1=a->real;
+	double a2=a->imaginary;
+	
+	double b1=b->real;
+	double b2=b->imaginary;
+	
+	double c_real=a1*b1+(-1)*(a2*b2);
+	double c_imaginary=(a2*b1+a1*b2);
+	
+	
+	
+	return newComplexNumber(c_real,c_imaginary);
 }
 
 //Returns a pointer to a new Complex Number equal to a+b
 ComplexNumber* ComplexSum(ComplexNumber* a, ComplexNumber* b)
 {
     //YOUR CODE HERE
-	return NULL;
+	return newComplexNumber(a->real+b->real,a->imaginary+b->imaginary);
+	
 }
 
 //Returns the absolute value of Complex Number a
