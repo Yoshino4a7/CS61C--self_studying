@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc -std=c99
 CFLAGS = -lm -g
 
 Mandelbrot: ComplexNumber.o Mandelbrot.o MandelFrame.o

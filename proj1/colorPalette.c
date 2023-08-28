@@ -20,6 +20,60 @@ void usage(char* argv[])
 int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputfile)
 {
 	//YOUR CODE HERE
+	FILE * fp_t =fopen(outputfile,"w");
+	
+	
+	int * colorcount=(int *)malloc(sizeof(int));
+	int ** ar = FileToColorMap(colorfile,colorcount);
+	fprintf(fp_t,"P3 %d %d 255\n",width,heightpercolor*(*colorcount));
+	
+	if(ar==NULL||width<1||heightpercolor<1)
+	{
+		return 1;
+	}
+	
+
+	for(int i = 0;i<(*colorcount);i++){
+			for(int row = 0;row<heightpercolor;row++){
+				
+				for(int col = 0;col<width;col++){
+					
+					
+					if(col==width-1){
+						fprintf(fp_t,"%d %d %d",ar[i][0],ar[i][1],ar[i][2]);
+					}else{
+						fprintf(fp_t,"%d %d %d ",ar[i][0],ar[i][1],ar[i][2]);
+					}
+					
+					
+					
+					
+				}
+				fprintf(fp_t,"\n");
+				
+			}
+		
+	}
+	for(int i = 0;i<(*colorcount);i++){
+		
+		
+		free(ar[i]);
+		
+		
+		
+	}
+	free(colorcount);
+	free(ar);
+	fclose(fp_t);
+	
+	
+	
+	
+	
+	
+
+	
+	
 	return 0;
 }
 
@@ -27,6 +81,57 @@ int P3colorpalette(char* colorfile, int width, int heightpercolor, char* outputf
 int P6colorpalette(char* colorfile, int width, int heightpercolor, char* outputfile)
 {
 	//YOUR CODE HERE
+	
+	FILE * fp_t =fopen(outputfile,"w");
+	
+	
+	int * colorcount=(int *)malloc(sizeof(int));
+	int ** res = FileToColorMap(colorfile,colorcount);
+	fprintf(fp_t,"P6 %d %d 255\n",width,heightpercolor*(*colorcount));
+	
+	if(res==NULL||width<1||heightpercolor<1)
+	{
+		return 1;
+	}
+	
+	
+	for(int i = 0;i<(*colorcount);i++){
+		for(int row = 0;row<heightpercolor;row++){
+			
+			for(int col = 0;col<width;col++){
+				
+				
+			
+					fprintf(fp_t,"%c%c%c",res[i][0],res[i][1],res[i][2]);
+			
+				
+				
+				
+			}
+		
+			
+		}
+		
+	}
+	for(int i = 0;i<(*colorcount);i++){
+		
+		
+		free(res[i]);
+		
+		
+		
+	}
+	free(colorcount);
+	free(res);
+	
+	fclose(fp_t);
+	
+	
+
+	
+	
+
+	
 	return 0;
 }
 
@@ -39,6 +144,7 @@ int main(int argc, char* argv[])
 		usage(argv);
 		return 1;
 	}
+	
 	int width = atoi(argv[3]);
 	int height = atoi(argv[4]);
 	char* P3end = "/colorpaletteP3.ppm";
