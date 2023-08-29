@@ -18,47 +18,24 @@
 int** FileToColorMap(char* colorfile, int* colorcount)
 {
 	//YOUR CODE HERE
+	FILE *ptr = fopen(colorfile, "r");
+	if(ptr == NULL) return NULL;
+	fscanf(ptr, "%d", colorcount);
 
-
-	int color_count;
-	int sum=0;
-	FILE * f=fopen(colorfile,"r");
-	fscanf(f,"%d",&color_count);
-	
-	
-		int ** ar=(int **)malloc(sizeof(int*)*color_count);
-	for(int i=0;i<color_count;i++){
-		
-		ar[i]=(int *)malloc(sizeof(int)*3);
-		
+	int **res;
+	res = (int**)malloc((*colorcount)*sizeof(int*));
+	for(int i=0; i<(*colorcount); i++){
+		res[i] = (int*)malloc(3*sizeof(int));
 	}
 	
-	(*colorcount)=color_count;
-	
-	
-
-	int i=0;
-	while(i<color_count)
-	{
-		fscanf(f,"%d %d %d",&ar[i][0],&ar[i][1],&ar[i][2]);
-
-
-		sum++;
-		i++;
+	for(int i=0; i<(*colorcount); i++){
+		fscanf(ptr, "%d %d %d", &res[i][0], &res[i][1], &res[i][2]);
 	}
-	
-	fclose(f);
-	return ar;
-//	if(sum!= (*colorcount)){
-//		(*colorcount)=sum;
-//		return result;
-//	}else{
-//		return result;
-//	}
-		
-		
-		
-	
+	fclose(ptr);
+
+	return res;
 }
+
+
 
 

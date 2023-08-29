@@ -1,4 +1,0 @@
-1.find
-2.pstree
-3.exit
-4.compare
